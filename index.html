@@ -3,10 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xwaste.eu</title>
+    <title>Xwaste.eu - Strona w trakcie budowy</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        .recycle {
+            width: 150px;
+            animation: rotate 3s linear infinite;
+        }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+    </style>
 </head>
 <body>
-    <h1>Witaj na Xwaste.eu!</h1>
-    <p>To jest moja pierwsza strona internetowa hostowana na GitHub Pages.</p>
+    <div class="container">
+        <svg class="recycle" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30.4 6.8c-1-1.6-3.4-1.6-4.4 0l-5.6 9.4-2.2-1.3c-2.4-1.3-5.5-.5-6.8 2l-3.5 6c-1.3 2.4-.5 5.5 2 6.8l14.6 8.4c2.4 1.3 5.5.5 6.8-2l3.5-6c1.3-2.4.5-5.5-2-6.8L32 15.6l5.6-9.4zM6.8 30.4c-1.6-1-1.6-3.4 0-4.4l9.4-5.6-1.3-2.2c-1.3-2.4-.5-5.5 2-6.8l6-3.5c2.4-1.3 5.5-.5 6.8 2l8.4 14.6c1.3 2.4.5 5.5-2 6.8l-6 3.5c-2.4 1.3-5.5.5-6.8-2l-1.3-2.2-9.4 5.6zM37.6 57.2c1 1.6 3.4 1.6 4.4 0l5.6-9.4 2.2 1.3c2.4 1.3 5.5.5 6.8-2l3.5-6c1.3-2.4.5-5.5-2-6.8L44.4 26.4c-2.4-1.3-5.5-.5-6.8 2l-3.5 6c-1.3 2.4-.5 5.5 2 6.8l1.3 2.2-5.6 9.4z"/>
+        </svg>
+        <div class="message">
+            <p>Strona w trakcie budowy</p>
+            <p>Website under construction</p>
+        </div>
+    </div>
 </body>
 </html>
