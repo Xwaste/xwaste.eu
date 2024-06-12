@@ -5,38 +5,194 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xwaste.eu - Strona w trakcie budowy</title>
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        * {
+            border: 0;
+            box-sizing: border-box;
             margin: 0;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
+            padding: 0;
+        }
+        :root {
+            font-size: calc(16px + (20 - 16) * (100vw - 320px) / (1280 - 320));
+        }
+        body {
+            background-color: hsl(223, 90%, 95%);
+            font: 1em/1.5 sans-serif;
+            height: 100vh;
+            display: grid;
+            place-items: center;
         }
         .container {
             text-align: center;
         }
-        .recycle {
-            width: 150px;
-            animation: rotate 3s linear infinite;
+        .recycle-loader {
+            position: relative;
+            width: 16em;
+            height: 16em;
+            margin-bottom: 20px;
         }
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .recycle-loader .ball,
+        .recycle-loader .ball-inner-shadow,
+        .recycle-loader .ball-outer-shadow,
+        .recycle-loader .ball-side-shadows,
+        .recycle-loader .ball-texture,
+        .recycle-loader .ball-texture:before,
+        .recycle-loader .inner-ring,
+        .recycle-loader .outer-ring,
+        .recycle-loader .track-cover {
+            border-radius: 50%;
+            position: absolute;
         }
-        .message {
-            margin-top: 20px;
-            font-size: 1.5em;
+        .recycle-loader .ball,
+        .recycle-loader .ball-inner-shadow,
+        .recycle-loader .ball-outer-shadow,
+        .recycle-loader .ball-texture:before,
+        .recycle-loader .track-cover {
+            animation: ball 3s linear infinite;
+        }
+        .recycle-loader .ball {
+            top: calc(50% - 1.25em);
+            left: calc(50% - 1.25em);
+            transform: rotate(0) translateY(-6.5em);
+            width: 2.5em;
+            height: 2.5em;
+        }
+        .recycle-loader .ball-inner-shadow {
+            animation-name: ballInnerShadow;
+            box-shadow:
+                0 0.1em 0.2em hsla(0, 0%, 0%, 0.3),
+                0 0 0.2em hsla(0, 0%, 0%, 0.1) inset,
+                0 -1em 0.5em hsla(0, 0%, 0%, 0.15) inset;
+            width: 100%;
+            height: 100%;
+        }
+        .recycle-loader .ball-outer-shadow {
+            animation-name: ballOuterShadow;
+            background-image: linear-gradient(hsla(0, 0%, 0%, 0.15),hsla(0, 0%, 0%, 0));
+            border-radius: 0 0 50% 50% / 0 0 100% 100%;
+            filter: blur(2px);
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 250%;
+            transform: rotate(20deg);
+            transform-origin: 50% 0;
+            z-index: -2;
+        }
+        .recycle-loader .ball-side-shadows {
+            background-color: hsla(0, 0%, 0%, 0.1);
+            filter: blur(2px);
+            width: 100%;
+            height: 100%;
+            transform: scale(0.75,1.1);
+            z-index: -1;
+        }
+        .recycle-loader .ball-texture {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            transform: translate3d(0,0,0);
+        }
+        .recycle-loader .ball-texture:before {
+            animation-name: ballTexture;
+            animation-duration: 0.25s;
+            background: url(https://assets.codepen.io/416221/snow.jpg) 0 0 / 50% 100%;
+            content: "";
+            display: block;
+            filter: brightness(1.05);
+            top: 0;
+            right: 0;
+            width: 200%;
+            height: 100%;
+        }
+        .recycle-loader .inner-ring {
+            box-shadow:
+                0 -0.25em 0.5em hsla(0, 0%, 100%, 0.4),
+                0 0.5em 0.75em hsla(0, 0%, 100%, 0.4) inset,
+                0 0.5em 0.375em hsla(0, 0%, 0%, 0.15),
+                0 -0.5em 0.75em hsla(0, 0%, 0%, 0.15) inset;
+            top: 2.375em;
+            left: 2.375em;
+            width: calc(100% - 4.75em);
+            height: calc(100% - 4.75em);
+        }
+        .recycle-loader .outer-ring {
+            box-shadow:
+                0 -0.45em 0.375em hsla(0, 0%, 0%, 0.15),
+                0 0.5em 0.75em hsla(0, 0%, 0%, 0.15) inset,
+                0 0.25em 0.5em hsla(0, 0%, 100%, 0.4),
+                0 -0.5em 0.75em hsla(0, 0%, 100%, 0.4) inset;
+            top: 0.75em;
+            left: 0.75em;
+            width: calc(100% - 1.5em);
+            height: calc(100% - 1.5em);
+        }
+        .recycle-loader .track-cover {
+            animation-name: trackCover;
+            background-image: conic-gradient(hsla(223, 90%, 95%, 1) 210deg, hsla(223, 90%, 95%, 0) 270deg);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Animations */
+        @keyframes ball {
+            from {
+                transform: rotate(0) translateY(-6.5em);
+            }
+            50% {
+                transform: rotate(180deg) translateY(-6em);
+            }
+            to {
+                transform: rotate(360deg) translateY(-6.5em);
+            }
+        }
+        @keyframes ballInnerShadow {
+            from {
+                transform: rotate(0);
+            }
+            to {
+                transform: rotate(-360deg);
+            }
+        }
+        @keyframes ballOuterShadow {
+            from {
+                transform: rotate(20deg);
+            }
+            to {
+                transform: rotate(-340deg);
+            }
+        }
+        @keyframes ballTexture {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(50%);
+            }
+        }
+        @keyframes trackCover {
+            from {
+                transform: rotate(0);
+            }
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <svg class="recycle" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <path d="M30.4 6.8c-1-1.6-3.4-1.6-4.4 0l-5.6 9.4-2.2-1.3c-2.4-1.3-5.5-.5-6.8 2l-3.5 6c-1.3 2.4-.5 5.5 2 6.8l14.6 8.4c2.4 1.3 5.5.5 6.8-2l3.5-6c1.3-2.4.5-5.5-2-6.8L32 15.6l5.6-9.4zM6.8 30.4c-1.6-1-1.6-3.4 0-4.4l9.4-5.6-1.3-2.2c-1.3-2.4-.5-5.5 2-6.8l6-3.5c2.4-1.3 5.5-.5 6.8 2l8.4 14.6c1.3 2.4.5 5.5-2 6.8l-6 3.5c-2.4 1.3-5.5.5-6.8-2l-1.3-2.2-9.4 5.6zM37.6 57.2c1 1.6 3.4 1.6 4.4 0l5.6-9.4 2.2 1.3c2.4 1.3 5.5.5 6.8-2l3.5-6c1.3-2.4.5-5.5-2-6.8L44.4 26.4c-2.4-1.3-5.5-.5-6.8 2l-3.5 6c-1.3 2.4-.5 5.5 2 6.8l1.3 2.2-5.6 9.4z"/>
-        </svg>
+        <div class="recycle-loader">
+            <div class="ball"></div>
+            <div class="ball-inner-shadow"></div>
+            <div class="ball-outer-shadow"></div>
+            <div class="ball-side-shadows"></div>
+            <div class="ball-texture"></div>
+            <div class="inner-ring"></div>
+            <div class="outer-ring"></div>
+            <div class="track-cover"></div>
+        </div>
         <div class="message">
             <p>Strona w trakcie budowy</p>
             <p>Website under construction</p>
