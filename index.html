@@ -3,83 +3,345 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xwaste.eu - Strona w trakcie budowy</title>
+    <title>xWaste.eu</title>
     <style>
-        * {
-            border: 0;
-            box-sizing: border-box;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
             margin: 0;
             padding: 0;
         }
-        :root {
-            font-size: calc(16px + (20 - 16) * (100vw - 320px) / (1280 - 320));
-            --background-color: #fffeff; /* Light background */
-            --loader-color: #fffeff; /* Dark color for loader elements */
-            --loader-background-color: #20b772; /* Green for loader background */
-            --text-color: #20b772; /* Red text color */
-        }
-        body {
-            background-color: var(--background-color);
-            color: var(--text-color);
-            font: 1em/1.5 sans-serif;
-            height: 100vh;
-            display: grid;
-            place-items: center;
-        }
         .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+        .logo {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            color: #b0b0b0;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        .btn {
+            background-color: #28a745;
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #218838;
+        }
+        .participants {
+            background-color: #1d1d1d;
+            padding: 2rem 0;
             text-align: center;
         }
-        .loader {
-            width: 60px;
+        .participants h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .logo-placeholder {
+            background-color: #2c2c2c;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-inner {
+            width: 40px;
             height: 40px;
-            position: relative;
-            display: inline-block;
+            background-color: #3a3a3a;
         }
-        .loader::before {
-            content: '';  
-            left: 0;
-            top: 0;
-            position: absolute;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background-color: var(--loader-background-color);
-            background-image: radial-gradient(circle 8px at 18px 18px, var(--loader-color) 100%, transparent 0), radial-gradient(circle 4px at 18px 0px, var(--loader-color) 100%, transparent 0), radial-gradient(circle 4px at 0px 18px, var(--loader-color) 100%, transparent 0), radial-gradient(circle 4px at 36px 18px, var(--loader-color) 100%, transparent 0), radial-gradient(circle 4px at 18px 36px, var(--loader-color) 100%, transparent 0), radial-gradient(circle 4px at 30px 5px, var(--loader-color) 100%, transparent 0), radial-gradient(circle 4px at 30px 5px, var(--loader-color) 100%, transparent 0), radial-gradient(circle 4px at 30px 30px, var(--loader-color) 100%, transparent 0), radial-gradient(circle 4px at 5px 30px, var(--loader-color) 100%, transparent 0), radial-gradient(circle 4px at 5px 5px, var(--loader-color) 100%, transparent 0);
-            background-repeat: no-repeat;
-            box-sizing: border-box;
-            animation: rotationBack 3s linear infinite;
+        .features {
+            padding: 4rem 0;
         }
-        .loader::after {
-            content: '';  
-            left: 35px;
-            top: 15px;
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background-color: var(--loader-background-color);
-            background-image: radial-gradient(circle 5px at 12px 12px, var(--loader-color) 100%, transparent 0), radial-gradient(circle 2.5px at 12px 0px, var(--loader-color) 100%, transparent 0), radial-gradient(circle 2.5px at 0px 12px, var(--loader-color) 100%, transparent 0), radial-gradient(circle 2.5px at 24px 12px, var(--loader-color) 100%, transparent 0), radial-gradient(circle 2.5px at 12px 24px, var(--loader-color) 100%, transparent 0), radial-gradient(circle 2.5px at 20px 3px, var(--loader-color) 100%, transparent 0), radial-gradient(circle 2.5px at 20px 3px, var(--loader-color) 100%, transparent 0), radial-gradient(circle 2.5px at 20px 20px, var(--loader-color) 100%, transparent 0), radial-gradient(circle 2.5px at 3px 20px, var(--loader-color) 100%, transparent 0), radial-gradient(circle 2.5px at 3px 3px, var(--loader-color) 100%, transparent 0);
-            background-repeat: no-repeat;
-            box-sizing: border-box;
-            animation: rotationBack 4s linear infinite reverse;
+        .features h2 {
+            color: #28a745;
+            text-transform: uppercase;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
         }
-        @keyframes rotationBack {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(-360deg);
-            }
+        .features h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+        .feature-item {
+            background-color: #1d1d1d;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+        }
+        .feature-item:hover {
+            background-color: #2c2c2c;
+        }
+        .feature-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .feature-title {
+            display: flex;
+            align-items: center;
+        }
+        .feature-icon {
+            margin-right: 0.5rem;
+        }
+        .feature-content {
+            display: none;
+            margin-top: 1rem;
+            color: #b0b0b0;
+        }
+        .feature-item.active .feature-content {
+            display: block;
+        }
+        .toggle-icon::after {
+            content: '▼';
+            font-size: 0.8rem;
+        }
+        .feature-item.active .toggle-icon::after {
+            content: '▲';
+        }
+        .contact-us {
+            background-color: #1d1d1d;
+            padding: 4rem 0;
+        }
+        .contact-us h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #3a3a3a;
+            background-color: #2c2c2c;
+            color: #ffffff;
+            border-radius: 0.25rem;
+        }
+        .form-group textarea {
+            height: 150px;
+        }
+        footer {
+            background-color: #28a745;
+            color: #ffffff;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        footer h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        footer h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        footer p {
+            margin-bottom: 2rem;
+        }
+        footer form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        footer input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 0.25rem;
+            background-color: #218838;
+            color: #ffffff;
+        }
+        footer input::placeholder {
+            color: #9fdfb5;
+        }
+        footer button {
+            width: 100%;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 0.25rem;
+            background-color: #ffffff;
+            color: #28a745;
+            cursor: pointer;
+        }
+        footer button:hover {
+            background-color: #f0f0f0;
+        }
+        .social-icons {
+            margin-top: 2rem;
+        }
+        .social-icons a {
+            color: #ffffff;
+            margin: 0 0.5rem;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="loader"></div>
-        <div class="message">
-            <p>Strona w trakcie budowy</p>
-            <p>Website under construction</p>
+    <header>
+        <div class="logo">xWaste.eu</div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Zrewolucjonizuj zarządzanie odpadami</h1>
+                <p>xWaste.eu: Wiodący rynek dla firm do sprzedaży odpadów nadających się do recyklingu, zakupu usług utylizacji i automatyzacji raportowania ESG, ROP i emisji CO2.</p>
+                <button class="btn">Rozpocznij</button>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Funkcje</h2>
+                <h3>Lepszy sposób zarządzania odpadami</h3>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <div class="feature-header">
+                            <div class="feature-title">
+                                <span class="feature-icon">♻️</span>
+                                <h4>Wymiana odpadów</h4>
+                            </div>
+                            <span class="toggle-icon"></span>
+                        </div>
+                        <div class="feature-content">
+                            <p>Kupuj i sprzedawaj materiały nadające się do recyklingu efektywnie na naszej platformie.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-header">
+                            <div class="feature-title">
+                                <span class="feature-icon">🚛</span>
+                                <h4>Usługi utylizacji</h4>
+                            </div>
+                            <span class="toggle-icon"></span>
+                        </div>
+                        <div class="feature-content">
+                            <p>Połącz się z certyfikowanymi usługami utylizacji odpadów dla twoich odpadów nienadających się do recyklingu.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-header">
+                            <div class="feature-title">
+                                <span class="feature-icon">📊</span>
+                                <h4>Automatyczne raportowanie</h4>
+                            </div>
+                            <span class="toggle-icon"></span>
+                        </div>
+                        <div class="feature-content">
+                            <p>Generuj raporty ESG, ROP i emisji CO2 automatycznie.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-header">
+                            <div class="feature-title">
+                                <span class="feature-icon">🤖</span>
+                                <h4>Automatyzacja BDO</h4>
+                            </div>
+                            <span class="toggle-icon"></span>
+                        </div>
+                        <div class="feature-content">
+                            <p>Usprawnij procesy BDO (Baza danych o produktach i opakowaniach oraz o gospodarce odpadami) za pomocą naszych narzędzi automatyzacji.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="participants">
+            <div class="container">
+                <h2>Dumni uczestnicy</h2>
+                <div class="logo-grid">
+                    <div class="logo-placeholder"><div class="logo-inner"></div></div>
+                    <div class="logo-placeholder"><div class="logo-inner"></div></div>
+                    <div class="logo-placeholder"><div class="logo-inner"></div></div>
+                    <div class="logo-placeholder"><div class="logo-inner"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-us">
+            <div class="container">
+                <h2>Skontaktuj się z nami</h2>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="email">Adres e-mail</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Wiadomość</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Wyślij</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <h2>Gotowy, aby zacząć?</h2>
+            <h3>Zapisz się na naszą listę oczekujących już dziś.</h3>
+            <p>Dołącz do rewolucji gospodarki o obiegu zamkniętym i bądź pierwszym, który uzyska dostęp do naszej platformy.</p>
+            <form>
+                <input type="email" placeholder="Wpisz swój adres e-mail" required>
+                <button type="submit">Dołącz do listy oczekujących</button>
+            </form>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook">F</a>
+                <a href="#" aria-label="Twitter">T</a>
+                <a href="#" aria-label="GitHub">G</a>
+            </div>
+            <p>&copy; 2024 xWaste.eu. Wszelkie prawa zastrzeżone.</p>
         </div>
-    </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.feature-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+    </script>
 </body>
 </html>
